@@ -9,5 +9,6 @@
     <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="value">Value:&#160;</string>
     <string name="g_value"></string>
+    <string name="tPro"></string>
 
 </resources>
