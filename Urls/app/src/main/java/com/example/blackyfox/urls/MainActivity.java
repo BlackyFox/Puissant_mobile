@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
     public void onStop(){
         super.onStop();
         unregisterReceiver(receiver);
+        //tototototototo
 
     }
     private class MyReceiver extends BroadcastReceiver{
