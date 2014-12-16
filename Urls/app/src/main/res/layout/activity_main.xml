@@ -17,17 +17,16 @@
             android:text="@string/descrip"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
 
+        <Button
+            android:id="@+id/jbut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jsonBut" />
     </LinearLayout>
-
-    <Button
-    android:id="@+id/jbut"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/jsonBut"
-    android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
