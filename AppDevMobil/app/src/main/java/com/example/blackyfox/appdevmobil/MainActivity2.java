@@ -20,7 +20,14 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class MainActivity2 extends Activity {
@@ -38,7 +45,8 @@ public class MainActivity2 extends Activity {
         MyPB = (ProgressBar)findViewById(R.id.pBAsync);
         tpro = (TextView)findViewById(R.id.tPro);
         tv1.setText(ms);
-        new MyAsyncTsk().execute(ms);
+        new DLTask().execute("http://fabrigli.fr/cours/example.json");
+        //new MyAsyncTsk().execute(ms);
     }
 
 
@@ -62,6 +70,48 @@ public class MainActivity2 extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private class DLTask extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... urls){
+            try{
+                return downloadUrl(urls[0]);
+            }catch(IOException e){
+                return"Unable to retrieve the Web Page.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String result){
+            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private String downloadUrl(String myUrl) throws IOException{
+        InputStream is = null;
+        try{
+            URL url = new URL(myUrl);
+            HttpURLConnection connec = (HttpURLConnection) url.openConnection();
+            connec.setRequestMethod("GET");
+            connec.connect();
+            int reponse = connec.getResponseCode();
+            is = connec.getInputStream();
+
+            String contentAsString = readIt(is, 500);
+            return(contentAsString);
+        }finally {
+            if(is != null){
+                is.close();
+            }
+        }
+    }
+
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException{
+        Reader r = null;
+        r = new InputStreamReader(stream, "UTF-8");
+        char[] buf = new char[len];
+        r.read(buf);
+        return new String(buf);
     }
 
     private class MyAsyncTsk extends AsyncTask<String, Integer, Void>{

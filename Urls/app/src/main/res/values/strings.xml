@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Urls</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="descrip">Cliquez sur le bouton suivant pour récupérer le Json.</string>
+    <string name="jsonBut">Get Json</string>
+
+</resources>
