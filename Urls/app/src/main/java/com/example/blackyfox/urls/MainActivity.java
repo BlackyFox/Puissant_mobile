@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -21,12 +22,14 @@ import java.net.URL;
 
 public class MainActivity extends Activity {
     Button jsonbut;
+    TextView jsonText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         jsonbut = (Button) findViewById(R.id.jbut);
+        jsonText = (TextView) findViewById(R.id.jsonres);
 
         jsonbut.setOnClickListener(jclick);
     }
@@ -48,7 +51,8 @@ public class MainActivity extends Activity {
         }
         @Override
         protected void onPostExecute(String result){
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+            jsonText.setText(result);
+            //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
         }
     }
 
