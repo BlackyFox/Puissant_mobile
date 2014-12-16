@@ -8,5 +8,7 @@
     <string name="jsonBut">Get Json</string>
     <string name="result"><b><u>Le Json :</u></b></string>
     <string name="jsontext"></string>
+    <string name="url"><b> URL :&#160;</b></string>
+    <string name="hint_url">Entrez l\'URL de téléchargement</string>
 
 </resources>

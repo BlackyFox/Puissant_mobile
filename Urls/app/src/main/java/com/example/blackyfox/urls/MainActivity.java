@@ -13,9 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.Object;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,25 +30,42 @@ import java.net.URL;
 public class MainActivity extends Activity {
     Button jsonbut;
     TextView jsonText;
+    EditText url;
     public static final String BROADCAST_ACTION = "com.example.blackyfox.urls.TRANSACTION_DONE";
     private MyReceiver receiver;
+    private IntentFilter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IntentFilter filter = new IntentFilter(BROADCAST_ACTION);
+        filter = new IntentFilter(BROADCAST_ACTION);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
         receiver = new MyReceiver();
-        registerReceiver(receiver, filter);
+        //LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
+        //registerReceiver(receiver, filter);
 
         jsonbut = (Button) findViewById(R.id.jbut);
         jsonText = (TextView) findViewById(R.id.jsonres);
+        url = (EditText) findViewById(R.id.url_edit);
 
         jsonbut.setOnClickListener(jclick);
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        unregisterReceiver(receiver);
+
+    }
     private class MyReceiver extends BroadcastReceiver{
         public void onReceive(Context context, Intent intent){
             String content = intent.getStringExtra("content");
@@ -56,9 +75,13 @@ public class MainActivity extends Activity {
 
     private View.OnClickListener jclick = new OnClickListener(){
         public void onClick(View v){
-            Intent i = new Intent(MainActivity.this, DLIntentService.class);
-            i.putExtra("request", "http://fabrigli.fr/cours/example.json");
-            startService(i);
+            if(url.getText().toString().matches("")) {
+                Toast.makeText(getApplicationContext(), "Entrez l\'URL !!", Toast.LENGTH_LONG).show();
+            }else {
+                Intent i = new Intent(MainActivity.this, DLIntentService.class);
+                i.putExtra("request", url.getText().toString());
+                startService(i);
+            }
         }
     };
 
