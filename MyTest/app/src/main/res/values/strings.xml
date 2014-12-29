@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Météo city</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="location"><u>Location :&#160;</u></string>
+    <string name="pays"><u>Pays :&#160;</u></string>
+    <string name="temperature"><u>Temperature :&#160;</u></string>
+    <string name="humidité"><u>Humidité :&#160;</u></string>
+    <string name="pression"><u>Pression :&#160;</u></string>
+    <string name="bget">Get</string>
+    <string name="hint">Entrez une ville</string>
+
+</resources>
