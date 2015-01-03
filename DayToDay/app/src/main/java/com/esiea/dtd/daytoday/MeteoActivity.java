@@ -226,7 +226,7 @@ public class MeteoActivity extends ActionBarActivity {
         @Override
         public Dialog onCreateDialog (Bundle savedInstanceState){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Cette application a été réalisée par Antoine PUISSANT");
+            builder.setMessage(R.string.realise);
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // continue with delete

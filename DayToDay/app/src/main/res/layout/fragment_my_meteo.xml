@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/bmeteo"
         android:layout_gravity="center"
-        android:src="@drawable/banner_weather"
+        android:src="@drawable/ic_meteo"
         android:scaleType="centerInside"
         android:background="@android:color/transparent"/>
 </FrameLayout>

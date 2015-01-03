@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class MyCalendarFragment extends Fragment {
@@ -37,13 +39,14 @@ public class MyCalendarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_calendar, container, false);
-        Button orga = (Button)v.findViewById(R.id.organizer);
+        ImageButton orga = (ImageButton)v.findViewById(R.id.organizer);
         orga.setOnClickListener(click);
         return v;
     }
 
     private View.OnClickListener click = new View.OnClickListener() {
         public void onClick(View v) {
+            Toast.makeText(getActivity(), "Calendrier", Toast.LENGTH_LONG).show();
             //Intent i = new Intent(getActivity(), AgendaActivity.class);
             //getActivity().startActivity(i);
         }

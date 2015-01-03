@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends FragmentActivity {
@@ -62,6 +63,8 @@ public class MainActivity extends FragmentActivity {
             return this.frags.size();
         }
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
