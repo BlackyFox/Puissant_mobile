@@ -3,6 +3,9 @@ package com.esiea.dtd.daytoday;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -14,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,15 +41,17 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Created by Isabelle on 02/01/2015.
+ * Created by Antoine on 02/01/2015.
  */
 public class MeteoActivity extends ActionBarActivity {
-    private static final String DONE = "com.example.antoine.mytest.DONE";
+    private static final String DONE = "com.esiea.dtd.daytoday.DONE";
     private MyReceiver receiver;
     private IntentFilter filter;
 
+    private static final int notificationID = 1234;
+
     private String urlStart = "http://api.openweathermap.org/data/2.5/weather?q=";
-    private Button bget;
+    private Button bget, braz;
     private TextView location_ville, location_pays,country,temperature,humidity,pressure, titre,
             wdesc, Wdate;
     private ImageView img;
@@ -66,6 +73,7 @@ public class MeteoActivity extends ActionBarActivity {
         receiver = new MyReceiver();
 
         bget = (Button) findViewById(R.id.bget);
+        braz = (Button) findViewById(R.id.bclear);
         location_ville = (EditText)findViewById(R.id.location_ville);
         location_pays = (EditText)findViewById(R.id.location_pays);
         country = (TextView)findViewById(R.id.pays);
@@ -80,6 +88,7 @@ public class MeteoActivity extends ActionBarActivity {
         Wdate = (TextView)findViewById(R.id.date);
 
         bget.setOnClickListener(bget_click);
+        braz.setOnClickListener(raz_click);
     }
 
     @Override
@@ -124,6 +133,7 @@ public class MeteoActivity extends ActionBarActivity {
                 new LoadImage().execute("http://openweathermap.org/img/w/"+obj.getIcon()+".png");
 
                 wdesc.setText("("+obj.getDesc()+")");
+                showNotification(country.getText().toString(), temperature.getText().toString());
             }
             if(obj.getEtat() == "do not exist"){
                 Toast.makeText(getApplicationContext(), "Spelling is wrong, please check and " +
@@ -138,6 +148,31 @@ public class MeteoActivity extends ActionBarActivity {
             imm.hideSoftInputFromWindow(location_ville.getWindowToken(), 0);
         }
     }
+
+    private void showSoftKeyboard(){
+        if(getCurrentFocus()!=null && getCurrentFocus() instanceof EditText){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context
+                    .INPUT_METHOD_SERVICE);
+            imm.showSoftInput(location_ville, InputMethodManager.SHOW_IMPLICIT);
+            imm.showSoftInput(location_pays, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private View.OnClickListener raz_click = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            country.setText("");
+            Wdate.setText("");
+            temperature.setText("");
+            humidity.setText("");
+            pressure.setText("");
+            wdesc.setText("");
+            img.setImageBitmap(null);
+            location_pays.setText("");
+            location_ville.setText("");
+            showSoftKeyboard();
+        }
+    };
     private View.OnClickListener bget_click = new View.OnClickListener(){
         public void onClick(View v){
             if(location_ville.getText().toString().matches("") && location_pays.getText()
@@ -178,6 +213,32 @@ public class MeteoActivity extends ActionBarActivity {
         }
     };
 
+
+    private void showNotification(String ville, String temperature){
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_notif)
+                        .setContentTitle("Météo de "+ ville)
+                        .setContentText("Il fait "+temperature);
+        Intent resultIntent = new Intent(this, MeteoActivity.class);
+        resultIntent.putExtra("notificationID", notificationID);
+
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MeteoActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+// mId allows you to update the notification later on.
+        mNotificationManager.notify(notificationID, mBuilder.build());
+
+    }
     public static String removeAccent(String source) {
         return Normalizer.normalize(source, Normalizer.Form.NFD).replaceAll("[\u0300-\u036F]", "");
     }

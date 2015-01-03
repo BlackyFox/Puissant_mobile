@@ -47,8 +47,8 @@ public class MyCalendarFragment extends Fragment {
     private View.OnClickListener click = new View.OnClickListener() {
         public void onClick(View v) {
             Toast.makeText(getActivity(), "Calendrier", Toast.LENGTH_LONG).show();
-            //Intent i = new Intent(getActivity(), AgendaActivity.class);
-            //getActivity().startActivity(i);
+            Intent i = new Intent(getActivity(), AgendaActivity.class);
+            getActivity().startActivity(i);
         }
     };
 }

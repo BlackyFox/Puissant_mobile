@@ -20,13 +20,20 @@
         </activity>
         <activity
             android:name=".MeteoActivity"
-            android:label="@string/title_activity_meteo"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_meteo" >
         </activity>
+
         <service
             android:name=".DLIntentService"
             android:exported="false" >
         </service>
+
+        <activity
+            android:name=".AgendaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_agenda" >
+        </activity>
     </application>
 
 </manifest>

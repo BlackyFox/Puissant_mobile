@@ -17,14 +17,14 @@ import java.net.URL;
 public class DLIntentService extends IntentService {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "com.example.antoine.mytest.action.FOO";
-    private static final String ACTION_BAZ = "com.example.antoine.mytest.action.BAZ";
+    private static final String ACTION_FOO = "com.esiea.dtd.daytoday.action.FOO";
+    private static final String ACTION_BAZ = "com.esiea.dtd.daytoday.action.BAZ";
 
-    private static final String DONE = "com.example.antoine.mytest.DONE";
+    private static final String DONE = "com.esiea.dtd.daytoday.DONE";
 
     // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "com.example.antoine.mytest.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "com.example.antoine.mytest.extra.PARAM2";
+    private static final String EXTRA_PARAM1 = "com.esiea.dtd.daytoday.extra.PARAM1";
+    private static final String EXTRA_PARAM2 = "com.esiea.dtd.daytoday.extra.PARAM2";
 
     /**
      * Starts this service to perform action Foo with the given parameters. If
