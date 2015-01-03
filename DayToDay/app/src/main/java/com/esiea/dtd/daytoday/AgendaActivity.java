@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -161,21 +162,16 @@ public class AgendaActivity extends ActionBarActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int index = info.position;
 
         int j = item.getItemId();
         switch(j) {
             case 0:
-                Log.d("", "Modifier " + index);
-                Intent i = new Intent();
-                return true;
-            case 1:
                 Log.d("", "Supprimer " + index);
                 listItem.remove(index);
                 Log.d("Nouvelle taille du bordel: ", new String(listItem.size() +"éléments"));
-                removeFromFile(index);
+                removeFromFile(listItem);
                 return true;
 
             default:
@@ -186,53 +182,80 @@ public class AgendaActivity extends ActionBarActivity {
         return false;
     }
 
-    private void removeFromFile(int index) {
+    private void removeFromFile(ArrayList<HashMap<String, String>> listItem) {
 
-        String tmp;
-        int cmpt = 0;
-        int length = (int) file.length();
-        byte[] bytes = new byte[length];
+        File ff = getFileStreamPath("myAgenda.txt");
+        boolean deleted = ff.delete();
 
-        if(index >= listItem.size()) {
-            Log.d("ERROR", "Index > size, index =" + index);
-            return;
+        for(int a = 0; a < listItem.size(); a++){
+            HashMap<String, String>tempMap = listItem.get(a);
+            String tempNom = tempMap.get("titre");
+            String tempType = tempMap.get("type");
+            String tempDate = tempMap.get("date");
+            String tempHeure = tempMap.get("time");
+
+
+            if (ff.length() == 0) {
+                //On écrit dedans
+                try {
+                    FileOutputStream stream = new FileOutputStream(file);
+                    stream.write(tempNom.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempType.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempDate.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempHeure.getBytes());
+                    stream.write("¤¤".getBytes());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                //On lit le fichier, on stocke ce qu'on a lu, on ajoute à l'arraylist la tache actuelle et on réécrit tout
+
+                int length = (int) file.length();
+
+                byte[] bytes = new byte[length];
+
+
+                try {
+                    FileInputStream in = new FileInputStream(file);
+                    in.read(bytes);
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                String contents = new String(bytes);
+
+                try {
+                    FileOutputStream stream = new FileOutputStream(file);
+                    stream.write(contents.getBytes());
+
+                    stream.write(tempNom.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempType.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempDate.getBytes());
+                    stream.write("**".getBytes());
+                    stream.write(tempHeure.getBytes());
+                    stream.write("¤¤".getBytes());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        try {
-            FileInputStream in = new FileInputStream(file);
-            in.read(bytes);
-            in.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        String contents = new String(bytes);
-        StringTokenizer token = new StringTokenizer(contents, "¤¤");
-
-        // try {
-           /* FileWriter out = new FileWriter(file, false);
-            PrintWriter pw = new PrintWriter(out);
-            pw.write("");
-            out.close();
-            FileWriter out2 = new FileWriter(file, true);
-            PrintWriter pw2 = new PrintWriter(out);
-*/
-        tmp = token.nextToken();
-
-        while(cmpt != index) {
-            // pw2.write(tmp+"¤¤");
-            tmp = token.nextToken();
-            cmpt ++;
-        }
-        Log.d("NB TOKEN: ", new String(cmpt+"\ttoken supprimé:,\t"+tmp));
-        mSchedule.notifyDataSetChanged();
-
-
+        finish();
+        startActivity(getIntent());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_agenda, menu);
         return true;
     }
 
@@ -263,6 +286,15 @@ public class AgendaActivity extends ActionBarActivity {
             case R.id.m_help: {
                 MyDialog md = new MyDialog();
                 md.show(getFragmentManager(), "tag_frag");
+                break;
+            }
+            case R.id.m_delete: {
+                File ff = getFileStreamPath("myAgenda.txt");
+                if (ff.length() > 0) {
+                    ff.delete();
+                    finish();
+                    startActivity(getIntent());
+                }
             }
         }
 

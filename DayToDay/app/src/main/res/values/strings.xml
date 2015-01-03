@@ -15,20 +15,19 @@
     <string name="hint_ville">Entrez la ville (Ex : Paris)</string>
     <string name="hint_pays">Entrez le pays (Ex : France)</string>
     <string name="condition"><u>Condition météo :</u></string>
-    <string name="m_help">Help</string>
+    <string name="m_help">A propos</string>
     <string name="m_home">Home</string>
     <string name="meteo">Météo</string>
     <string name="organizer">Organiseur</string>
     <string name="news">Actualités</string>
     <string name="title_activity_test">test</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="realise">Cette application à été réalisée par:\n<ol><li>Lucien CASSAGNES\n</li> <li>Thibaut DA SILVA\n</li><li>Antoine PUISSANT\n</li></ol>\nLes information météorologiques
+    <string name="realise">Cette application à été réalisée par:\n<ol><li>Lucien CASSAGNES\n</li><li>Thibaut DA SILVA\n</li><li>Antoine PUISSANT\n</li></ol>\nLes information météorologiques
         sont récupérée sur le site\n<u>http://openweathermap.org/api</u></string>
-    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="title_activity_agenda">Mon Agenda</string>
     <string name="clear">Effacer</string>
     <string name="title_activity_new_task">NewTaskActivity</string>
 
-    <string name="mon_agenda">Mon Agenda</string>
     <string name="to_agenda">Vers Agenda</string>
     <string name="title_activity_add_task">addTask</string>
     <string name="nouvelle_tache">Nouvelle Tache</string>
@@ -42,8 +41,9 @@
     <string name="date_button_set">  Set Date  </string>
     <string name="time_button_set">  Set Time  </string>
 
+    <string name="delete">Supprimer toutes les tâches</string>
+
     <string-array name="menu">
-        <item>Modifier</item>
         <item>Supprimer</item>
     </string-array>
 

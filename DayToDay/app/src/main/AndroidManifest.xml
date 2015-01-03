@@ -36,6 +36,7 @@
         </activity>
         <activity
             android:name=".NewTaskActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_new_task" >
         </activity>
     </application>

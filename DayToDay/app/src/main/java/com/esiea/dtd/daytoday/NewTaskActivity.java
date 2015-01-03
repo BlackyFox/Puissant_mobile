@@ -211,6 +211,7 @@ public class NewTaskActivity extends ActionBarActivity {
                 i.putExtra("day", day);
                 i.putExtra("month", month);
                 i.putExtra("year", year);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
         }
@@ -329,6 +330,7 @@ public class NewTaskActivity extends ActionBarActivity {
             case R.id.m_help: {
                 MyDialog md = new MyDialog();
                 md.show(getFragmentManager(), "tag_frag");
+                break;
             }
         }
 

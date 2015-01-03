@@ -5,4 +5,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="TextShadow_disable">
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:shadowColor">#0D67B9</item>
+        <item name="android:shadowRadius">0</item>
+        <item name="android:shadowDy">0</item>
+    </style>
+    <style name="TextShadow_enable">
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:shadowColor">#0D67B9</item>
+        <item name="android:shadowRadius">2.0</item>
+        <item name="android:shadowDy">-2.0</item>
+    </style>
+
 </resources>

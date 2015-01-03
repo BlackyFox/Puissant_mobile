@@ -73,7 +73,9 @@ public class MeteoActivity extends ActionBarActivity {
         receiver = new MyReceiver();
 
         bget = (Button) findViewById(R.id.bget);
+        bget.setTextAppearance(this, R.style.TextShadow_disable);
         braz = (Button) findViewById(R.id.bclear);
+        braz.setTextAppearance(this, R.style.TextShadow_disable);
         location_ville = (EditText)findViewById(R.id.location_ville);
         location_pays = (EditText)findViewById(R.id.location_pays);
         country = (TextView)findViewById(R.id.pays);
@@ -277,6 +279,7 @@ public class MeteoActivity extends ActionBarActivity {
             case R.id.m_help: {
                 MyDialog md = new MyDialog();
                 md.show(getFragmentManager(), "tag_frag");
+                break;
             }
         }
 
