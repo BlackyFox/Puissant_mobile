@@ -4,10 +4,12 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/meteo"
         android:id="@+id/bmeteo"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:src="@drawable/banner_weather"
+        android:scaleType="centerInside"
+        android:background="@android:color/transparent"/>
 </FrameLayout>

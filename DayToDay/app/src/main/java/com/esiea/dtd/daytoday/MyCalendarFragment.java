@@ -1,10 +1,12 @@
 package com.esiea.dtd.daytoday;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 public class MyCalendarFragment extends Fragment {
@@ -34,6 +36,16 @@ public class MyCalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_calendar, container, false);
+        View v = inflater.inflate(R.layout.fragment_my_calendar, container, false);
+        Button orga = (Button)v.findViewById(R.id.organizer);
+        orga.setOnClickListener(click);
+        return v;
     }
+
+    private View.OnClickListener click = new View.OnClickListener() {
+        public void onClick(View v) {
+            //Intent i = new Intent(getActivity(), AgendaActivity.class);
+            //getActivity().startActivity(i);
+        }
+    };
 }

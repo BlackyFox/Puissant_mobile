@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class MyMeteoFragment extends Fragment {
@@ -38,7 +39,7 @@ public class MyMeteoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_my_meteo, container, false);
-        Button meteo = (Button) v.findViewById(R.id.bmeteo);
+        ImageButton meteo = (ImageButton) v.findViewById(R.id.bmeteo);
         meteo.setOnClickListener(click);
         return v;
     }
