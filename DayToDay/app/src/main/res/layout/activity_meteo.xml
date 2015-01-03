@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location_ville"
                 android:textColor="#ff9f0d00"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginLeft="13dp"/>
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location_pays"
                 android:textColor="#ff9f0d00"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginLeft="13dp"/>
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -111,7 +113,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/temperature"
                 android:textColor="#ff9f0d00"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginLeft="13dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,7 +132,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/humidité"
                 android:textColor="#ff9f0d00"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginLeft="13dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -146,7 +150,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pression"
                 android:textColor="#ff9f0d00"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginLeft="13dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,7 +169,8 @@
                 android:text="@string/condition"
                 android:textColor="#ff9f0d00"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="13dp"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

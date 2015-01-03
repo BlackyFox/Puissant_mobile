@@ -20,7 +20,8 @@
         </activity>
         <activity
             android:name=".MeteoActivity"
-            android:label="@string/title_activity_meteo" >
+            android:label="@string/title_activity_meteo"
+            android:configChanges="orientation|keyboardHidden|screenSize">
         </activity>
         <service
             android:name=".DLIntentService"
