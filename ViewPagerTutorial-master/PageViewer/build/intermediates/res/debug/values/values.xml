@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/C:/Users/Antoine/AndroidStudioProjects/Puissant_mobile/ViewPagerTutorial-master/PageViewer/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/C:/Users/Antoine/AndroidStudioProjects/Puissant_mobile/ViewPagerTutorial-master/PageViewer/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">DayToDay</string>
+    <string name="bget">Get</string>
+    <string name="condition"><u>Condition météo :</u> </string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hint_pays">Entrez le pays (Ex : France)</string>
+    <string name="hint_ville">Entrez la ville (Ex : Paris)</string>
+    <string name="humidité"><u>Humidité :</u> </string>
+    <string name="location_pays"><u>Pays :</u> </string>
+    <string name="location_ville"><u>Ville :</u> </string>
+    <string name="m_help">Help</string>
+    <string name="m_home">Home</string>
+    <string name="menu_settings">Settings</string>
+    <string name="meteo">Météo</string>
+    <string name="meteo_name">MeteoCity</string>
+    <string name="news">Actualités</string>
+    <string name="organizer">Organiseur</string>
+    <string name="pays"><u>Pays :</u> </string>
+    <string name="pression"><u>Pression :</u> </string>
+    <string name="temperature"><u>Temperature :</u> </string>
+    <string name="title_activity_meteo">MeteoActivity</string>
+    <string name="title_activity_page_view">DayToDay</string>
+    <string name="title_activity_test">test</string>
+    <!-- From: file:/C:/Users/Antoine/AndroidStudioProjects/Puissant_mobile/ViewPagerTutorial-master/PageViewer/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppTheme" parent="android:Theme.Light"/>
+</resources>

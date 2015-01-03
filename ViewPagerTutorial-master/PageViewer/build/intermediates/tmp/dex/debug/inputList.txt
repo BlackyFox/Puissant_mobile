@@ -1,0 +1,2 @@
+C:\Users\Antoine\AndroidStudioProjects\Puissant_mobile\ViewPagerTutorial-master\PageViewer\build\intermediates\classes\debug
+C:\Users\Antoine\AndroidStudioProjects\Puissant_mobile\ViewPagerTutorial-master\PageViewer\build\intermediates\pre-dexed\debug\support-v4-18.0.0-840618bcd9c44be73aaae9f1d6ba12659e8542e5.jar
