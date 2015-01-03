@@ -1,12 +1,70 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.esiea.dtd.daytoday.AgendaActivity">
+    android:background="#ffffe2bb"
+    tools:context="com.example.antoine.mytest.agenda">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-</RelativeLayout>
+    <LinearLayout>
+
+        <ImageView
+            android:background="@drawable/ic_agenda"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:text="@string/mon_agenda"
+            android:textSize="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/newtask"
+            android:text="+"
+            android:textSize="27dp"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="top"
+            android:layout_marginRight="15dp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:background="#ff643232"/>
+
+    </LinearLayout>
+
+    <LinearLayout>
+        <TextView
+            android:id="@+id/recup"
+            android:textSize="25dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="8"/>
+
+    </LinearLayout>
+
+    <LinearLayout>
+        <ListView
+            android:id="@+id/listviewperso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/editText1"
+            android:layout_below="@+id/button1" >
+        </ListView>
+    </LinearLayout>
+
+</TableLayout>

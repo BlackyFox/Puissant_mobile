@@ -12,15 +12,222 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import android.content.Context;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
 
 public class AgendaActivity extends ActionBarActivity {
+
+    private Button newTask2;
+    private TextView v;
+    String s1, s2;
+    private ListView maListeView;
+
+    Context context;
+    String path;
+    File file;
+
+    private SimpleAdapter mSchedule;
+    private HashMap<String, String> map;
+    //Création de la ArrayList qui remplira la listView
+
+    private ArrayList<HashMap<String, String>> listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
+
+        context = getApplicationContext();
+        listItem = new ArrayList<HashMap<String, String>>();
+
+        path = context.getFilesDir().getAbsolutePath();
+        file = new File(path + "/myAgenda.txt");
+
+        //Initialisation des variables
+        newTask2 = (Button) findViewById(R.id.newtask);
+        v = (TextView)findViewById(R.id.recup);
+        maListeView = (ListView)findViewById(R.id.listviewperso);
+
+
+
+        //On créer notre propre adapter
+        mSchedule = new SimpleAdapter (this.getBaseContext(), listItem, R.layout.affichageitem,
+                new String[] {"img","titre", "type", "time", "date"},
+                new int[] {R.id.img, R.id.titre, R.id.type, R.id.time, R.id.date});
+
+
+        //On applique notre Adapter sur notre listView
+        maListeView.setAdapter(mSchedule);
+        registerForContextMenu(maListeView);
+
+        newTask2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AgendaActivity.this, NewTaskActivity.class);
+                startActivity(i);
+            }
+        });
+
+
+        //On déclare la HashMap qui contiendra les informations pour un item
+        map = new HashMap<String, String>();
+
+        int length = (int) file.length();
+        byte[] bytes = new byte[length];
+
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        String contents = new String(bytes);
+        StringTokenizer token = new StringTokenizer(contents, "¤¤");
+
+        while(token.hasMoreTokens()) {
+            String element = token.nextToken();
+            StringTokenizer newtoken = new StringTokenizer(element, "**");
+
+            s1 = newtoken.nextToken();
+            s2 = newtoken.nextToken();
+            String tempdate = new String(newtoken.nextToken());
+            String temptime = new String(newtoken.nextToken());
+
+            map.put("type", s2);
+            map.put("titre", s1);
+            map.put("time", temptime);
+            map.put("date", tempdate);
+
+            switch (s2) {
+                case "Déjeuner":
+                    map.put("img", String.valueOf(R.drawable.dejeuner_logo));
+                    break;
+                case "Diner":
+                    map.put("img", String.valueOf(R.drawable.diner_logo));
+                    break;
+                case "Rendez-vous":
+                    map.put("img", String.valueOf(R.drawable.rdv_logo));
+                    break;
+                case "Réunion":
+                    map.put("img", String.valueOf(R.drawable.meeting_logo));
+                    break;
+                case "Soirée":
+                    map.put("img", String.valueOf(R.drawable.soiree_logo));
+                    break;
+                case "Autre":
+                    map.put("img", String.valueOf(R.drawable.autre_logo));
+                    break;
+            }
+
+            listItem.add(map);
+
+            mSchedule.notifyDataSetChanged();
+            map = new HashMap<String, String>();
+        }
+
+        Log.d("Taille du bordel: ", new String(listItem.size() +"éléments"));
     }
 
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId()==R.id.listviewperso) {
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            String[] menuItems = getResources().getStringArray(R.array.menu);
+            for (int i = 0; i<menuItems.length; i++) {
+                menu.add(Menu.NONE, i, i, menuItems[i]);
+            }
+
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        //AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int index = info.position;
+
+        int j = item.getItemId();
+        switch(j) {
+            case 0:
+                Log.d("", "Modifier " + index);
+                Intent i = new Intent();
+                return true;
+            case 1:
+                Log.d("", "Supprimer " + index);
+                listItem.remove(index);
+                Log.d("Nouvelle taille du bordel: ", new String(listItem.size() +"éléments"));
+                removeFromFile(index);
+                return true;
+
+            default:
+                Log.d("", "Error");
+                break;
+        }
+
+        return false;
+    }
+
+    private void removeFromFile(int index) {
+
+        String tmp;
+        int cmpt = 0;
+        int length = (int) file.length();
+        byte[] bytes = new byte[length];
+
+        if(index >= listItem.size()) {
+            Log.d("ERROR", "Index > size, index =" + index);
+            return;
+        }
+        try {
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        String contents = new String(bytes);
+        StringTokenizer token = new StringTokenizer(contents, "¤¤");
+
+        // try {
+           /* FileWriter out = new FileWriter(file, false);
+            PrintWriter pw = new PrintWriter(out);
+            pw.write("");
+            out.close();
+            FileWriter out2 = new FileWriter(file, true);
+            PrintWriter pw2 = new PrintWriter(out);
+*/
+        tmp = token.nextToken();
+
+        while(cmpt != index) {
+            // pw2.write(tmp+"¤¤");
+            tmp = token.nextToken();
+            cmpt ++;
+        }
+        Log.d("NB TOKEN: ", new String(cmpt+"\ttoken supprimé:,\t"+tmp));
+        mSchedule.notifyDataSetChanged();
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
