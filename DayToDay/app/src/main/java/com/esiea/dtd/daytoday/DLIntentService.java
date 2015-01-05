@@ -75,15 +75,15 @@ public class DLIntentService extends IntentService {
             }
             String dataString = intent.getStringExtra("request");
             try{
-                Log.d("URL", dataString);
+                //Log.d("URL", dataString);
                 String result = downloadUrl(dataString);
-                Log.d("JSON", result);
+                //Log.d("JSON", result);
                 Intent i = new Intent();
                 i.setAction(DONE);
                 i.putExtra("Json", result);
                 sendBroadcast(i);
             }catch (IOException e){
-                Log.d("IOExep", "erreur dans le DLintent service 1"+e.getMessage());
+                //Log.d("IOExep", "erreur dans le DLintent service 1"+e.getMessage());
                 Toast.makeText(getApplicationContext(), "Something  went wrong... " +
                                 "Check your internet connection and repress the Get button",
                         Toast.LENGTH_SHORT).show();
@@ -110,7 +110,7 @@ public class DLIntentService extends IntentService {
                 is.close();
             }
             connec.disconnect();
-            Log.d("DISCONEC", "Déconnexion effectuée");
+            //Log.d("DISCONEC", "Déconnexion effectuée");
         }
         return(contentAsString);
     }

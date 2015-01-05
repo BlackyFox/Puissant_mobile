@@ -69,7 +69,7 @@ public class JSONHandler {
                 city = reader.getString("name");
                 JSONObject sys = reader.getJSONObject("sys");
                 country = sys.getString("country");
-                Log.d("PAYS", country);
+                //Log.d("PAYS", country);
 
                 JSONObject main = reader.getJSONObject("main");
                 temperature = main.getString("temp");
@@ -100,7 +100,7 @@ public class JSONHandler {
 
     }
     public void fetchJSON(){
-        Log.d("JSON2", MyJsonString);
+        //Log.d("JSON2", MyJsonString);
         readAndParseJSON(MyJsonString);
     }
 

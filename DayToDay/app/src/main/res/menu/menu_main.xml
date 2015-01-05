@@ -8,12 +8,7 @@
         android:menuCategory="container"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_menu_home"/>
-    <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:menuCategory="container"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/m_help"
         android:title="@string/m_help"

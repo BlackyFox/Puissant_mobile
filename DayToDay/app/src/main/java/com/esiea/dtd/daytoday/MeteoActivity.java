@@ -138,8 +138,9 @@ public class MeteoActivity extends ActionBarActivity {
                 showNotification(country.getText().toString(), temperature.getText().toString());
             }
             if(obj.getEtat() == "do not exist"){
-                Toast.makeText(getApplicationContext(), "Spelling is wrong, please check and " +
-                        "submit again", Toast.LENGTH_SHORT).show();
+                bget.setEnabled(true);
+                Toast.makeText(getApplicationContext(), "Cette ville n'existe pas, vérifiez " +
+                        "l'othrographe et recommencez", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -177,12 +178,15 @@ public class MeteoActivity extends ActionBarActivity {
     };
     private View.OnClickListener bget_click = new View.OnClickListener(){
         public void onClick(View v){
-            if(location_ville.getText().toString().matches("") && location_pays.getText()
-                    .toString().matches("")) {
+            if((location_ville.getText().toString().matches("") && location_pays.getText()
+                    .toString().matches("")) || (location_ville.getText().toString().matches(""))) {
                 Toast.makeText(getApplicationContext(), "Entrez une ville", Toast.LENGTH_LONG)
                         .show();
             }else {
                 hideSoftKeyboard();
+                Toast.makeText(getApplicationContext(), "Nous recherchons la météo de "
+                        +location_ville.getText()+", veuillez patienter", Toast.LENGTH_SHORT).show();
+                bget.setEnabled(false);
                 country.setText("");
                 Wdate.setText("");
                 temperature.setText("");
@@ -191,7 +195,6 @@ public class MeteoActivity extends ActionBarActivity {
                 wdesc.setText("");
                 img.setImageBitmap(null);
 
-                //Toast.makeText(getApplicationContext(), "URL OK", Toast.LENGTH_LONG).show();
                 if(location_pays.getText().toString().matches("")){
                     String url = location_ville.getText().toString();
                     String url_totale = urlStart + url + "&lang=fr";
@@ -264,7 +267,7 @@ public class MeteoActivity extends ActionBarActivity {
             }
             case R.id.m_home: {
                 if(this.getClass().getSimpleName().matches("MainActivity")) {
-                    CharSequence text = "Already on the home page";
+                    CharSequence text = "Ceci est la page d'accueil";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(getApplicationContext(), text, duration);
@@ -306,7 +309,7 @@ public class MeteoActivity extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(MeteoActivity.this);
-            pDialog.setMessage("Loading Image ....");
+            pDialog.setMessage("Chargement de l'image ....");
             pDialog.show();
         }
         protected Bitmap doInBackground(String... args) {
@@ -329,13 +332,14 @@ public class MeteoActivity extends ActionBarActivity {
             return bitmap;
         }
         protected void onPostExecute(Bitmap image) {
+            bget.setEnabled(true);
             if(image != null){
                 img.setImageBitmap(image);
                 pDialog.dismiss();
             }else{
                 pDialog.dismiss();
-                Toast.makeText(MeteoActivity.this, "Image Does Not exist or Network Error",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(MeteoActivity.this, "L'image n'existe pas ou vous êtes hors connexion",
+                        Toast.LENGTH_LONG).show();
             }
         }
     }
